@@ -6,20 +6,16 @@
 
 DELIMITER //
 
-CREATE FUNCTION SafeDiv(a INT, b INT) RETURNS FLOAT
+CREATE FUNCTION SafeDiv(a INT, b INT)
+RETURNS FLOAT
+DETERMINISTIC
 BEGIN
-    DECLARE result INT;
-    
-    -- Check if the denominator is zero
-    IF b = 0 THEN
-        SET result = 0;
-    ELSE
-        -- Perform division
-        SET result = a / b; -- Use DIV for integer division
-    END IF;
-    
-    -- Return the result
-    RETURN result;
+    -- check if b is equal to 0
+        IF b = 0 THEN
+	    RETURN 0;
+        END IF;
+
+        RETURN a / b; -- divide a by b if b is not 0
 END //
 
 DELIMITER ;
