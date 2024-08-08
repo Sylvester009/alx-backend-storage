@@ -6,16 +6,20 @@
 
 DELIMITER //
 
-CREATE FUNCTION SafeDiv(a INT, b INT)
-RETURNS FLOAT
-DETERMINISTIC
+CREATE FUNCTION SafeDiv(a INT, b INT) RETURNS FLOAT
 BEGIN
-    -- check if b is equal to 0
-        IF b = 0 THEN
-	    RETURN 0;
-        END IF;
-
-        RETURN a / b; -- divide a by b if b is not 0
+    DECLARE result FLOAT;
+    
+    -- Check if the denominator is zero
+    IF b = 0 THEN
+        SET result = 0;
+    ELSE
+        -- Perform division
+        SET result = a / b; -- Use standard division for floating-point result
+    END IF;
+    
+    -- Return the result
+    RETURN result;
 END //
 
 DELIMITER ;
