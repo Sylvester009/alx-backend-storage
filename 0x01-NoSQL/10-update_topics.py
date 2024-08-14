@@ -10,7 +10,7 @@ def update_topics(mongo_collection, name, topics):
     """
     changes the list of topics approached
     in the school based on the names"""
-    mongo_collection.upadte_many(
+    mongo_collection.update_many(
         {"name": name},
         {"$set": {"topics": topics}}
     )
